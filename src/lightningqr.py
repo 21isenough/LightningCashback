@@ -15,33 +15,24 @@ def generate_lnurl(amt):
     satamount = round(satspereuro * amt)
 
     print("Sats per Euro = " + str(satspereuro))
-    print("Sats Total = " + str(satamount))
+    print("Sats Total = " + str(satamount) + '\n')
 
 
-    #data = {
-    #        'satoshis': str(round(amt)),
-    #}
+    data = {
+            'satoshis': str(round(amt)),
+    }
 
-    #response = requests.post(
-    #    APIURL,
-    #    auth=(USER, PASS),
-    #    data=json.dumps(data),
-    #    )
+    r = requests.post(
+        APIURL,
+        auth=(USER, PASS),
+        data=json.dumps(data),
+        )
 
-    #response = json.loads(response.text)
-    #print(response['lnurl'])
+    jsondata = json.loads(r.text)
 
-    response = json.dumps({'satoshis': satamount, 'lnurl': 'test'})
-
+    response = json.dumps({'satoshis': satamount, 'lnurl': jsondata['lnurl']})
 
     print(response)
-
-    #return json.dumps({'satoshis': satamount, 'lnurl': response['lnurl']})
-
-    #{
-   #'satoshis': satamount,
-   #'lnurl': response['lnurl'],
-   #}
 
 if __name__ == '__main__':
     try:
