@@ -2,6 +2,7 @@
 
 import mysql.connector
 import json
+from receipt_generator import generate_recipt
 
 '''
 {
@@ -43,5 +44,7 @@ orderdict = {
 #compile everything on a json
 
 orderjson = json.dumps(orderdict)
+
+generate_recipt(orderdict)
 
 
