@@ -3,10 +3,9 @@
 from config import *
 import requests, json, sys
 
-### Pass the amount in EUR to this funtions to receive LNURL string back
+### Pass the amount in EUR to this funtion - receive satoshis and lnurl as json
 
 def generate_lnurl(amt):
-
     request = requests.get(PRICEAPI)
     json_data = json.loads(request.text)
     price = json_data['last']
@@ -16,7 +15,6 @@ def generate_lnurl(amt):
 
     print("Sats per Euro = " + str(satspereuro))
     print("Sats Total = " + str(satamount) + '\n')
-
 
     data = {
             'satoshis': str(round(amt)),
@@ -29,10 +27,9 @@ def generate_lnurl(amt):
         )
 
     jsondata = json.loads(r.text)
-
     response = json.dumps({'satoshis': satamount, 'lnurl': jsondata['lnurl']})
 
-    print(response)
+    return response
 
 if __name__ == '__main__':
     try:
