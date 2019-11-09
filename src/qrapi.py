@@ -1,7 +1,7 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from escpos.printer import Usb
 
-import requests, json, sys
+import requests, json, sys, os
 
 from config import *
 
@@ -11,7 +11,7 @@ app = Flask(__name__)
 def generate_lnurl():
     request_data = request.get_json()
 
-    p = Usb(0x0483, 0x5720, 0)
+    #p = Usb(0x0483, 0x5720, 0)
 
     price_request = requests.get(PRICEAPI)
     price_json = json.loads(price_request.text)
@@ -36,10 +36,10 @@ def generate_lnurl():
     jsondata = json.loads(r.text)
     response = json.dumps({'satoshis': satamount, 'lnurl': jsondata['lnurl']})
 
-    p.qr(jsondata['lnurl'],ec=0,size=10)
-    p.cut()
+    #p.qr(jsondata['lnurl'],ec=0,size=10)
+    #p.cut()
 
-    return "QR Code printed"
+    return jsondata['lnurl'] #"QR Code printed"
     #return response
 
 app.run(host='0.0.0.0',port=5000)
