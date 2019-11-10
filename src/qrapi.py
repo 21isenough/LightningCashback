@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request, send_from_directory
-from escpos.printer import Usb
+# from escpos.printer import Usb
 
 import requests, json, sys, os
 
@@ -39,7 +39,7 @@ def generate_lnurl():
     #p.qr(jsondata['lnurl'],ec=0,size=10)
     #p.cut()
 
-    return jsondata['lnurl'] #"QR Code printed"
-    #return response
+    #return jsondata['lnurl'] #"QR Code printed"
+    return response
 
 app.run(host='0.0.0.0',port=5000)
